@@ -3,14 +3,14 @@
 ;	Date: 09-09-2019
 ;	Authors:
 ;		Roel de Vries
-;		Student name 2
+;		Anas Kwefati
 ;
 ;	Lab number 1
 ;	Title:	How to use the PORTS, digital IO, subroutine call
 ;
 ;	Hardware: STK600, CPU ATmega 2560
 ;
-;	Function: Turn on Led 3
+;	Function: Turn on LED 2 in Assembly
 ;
 ;	Input ports: None
 ;
@@ -21,7 +21,7 @@
 ;
 ;	Other information: None
 ;
-;	Changes in program: 
+;	Changes in program:
 ;		09-09-2019 > file created
 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 .include "m2560def.inc"

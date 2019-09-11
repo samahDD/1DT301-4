@@ -139,14 +139,14 @@ For the first task the goal was to get a light blinking. This was done by settin
 ;	Date: 09-09-2019
 ;	Authors:
 ;		Roel de Vries
-;		Student name 2
+;		Anas Kwefati
 ;
 ;	Lab number 1
 ;	Title:	How to use the PORTS, digital IO, subroutine call
 ;
 ;	Hardware: STK600, CPU ATmega 2560
 ;
-;	Function: Turn on Led 3
+;	Function: Turn on LED 2
 ;
 ;	Input ports: None
 ;
@@ -169,6 +169,64 @@ main:
 
 
 \section{Task 2}
+This is the code for the second task : 
+
+\lstset{style=Asm}
+
+\begin{lstlisting}
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 1DT301, Computer Technology I
+; Date: 2019-09-95
+; Author:
+;   Roel de Vries
+;   Anas Kwefati
+;
+;	Lab number 1
+;	Title:	How to use the PORTS, digital IO, subroutine call
+;
+;	Hardware: STK600, CPU ATmega 2560
+;
+;	Function: Turn on Led n if switch n is pressed
+;
+;	Input ports: PORTA, used for the switches
+;
+;	Output ports: PORTB, used for LEDS
+;
+;	Subroutines: None
+;	Included files: m2560def.inc
+;
+;	Other information: None
+;
+;	Changes in program:
+;		09-09-2019 > file created
+;
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+;TASK_2
+
+.include "m2560def.inc"
+ldi r16, 0xFF
+out DDRB, r16
+ldi r17, 0x00
+out DDRD, r17
+
+ldi r16, 0xFF
+out PORTB,r16
+
+
+loop:
+
+in r18, PIND
+ldi r20, 0xFF
+EOR r18, r20
+out PORTB, r18
+
+rjmp loop
+
+
+\end{lstlisting}
 
 
 \section{Task 3}
@@ -182,7 +240,7 @@ In task 3 the goal was to turn on led 0, only if switch 5 was pressed. by checki
 ;	Date: 09-09-2019
 ;	Authors:
 ;		Roel de Vries
-;		Student name 2
+;		Anas Kwefati
 ;
 ;	Lab number 1
 ;	Title:	How to use the PORTS, digital IO, subroutine call
@@ -233,7 +291,7 @@ For task 5 we needed to create a ring counter. This was done by creating a loop 
 ;	Date: 09-09-2019
 ;	Authors:
 ;		Roel de Vries
-;		Student name 2
+;		Anas Kwefati
 ;
 ;	Lab number 1
 ;	Title:	How to use the PORTS, digital IO, subroutine call
@@ -309,7 +367,7 @@ The Johnson counter was created by using two smaller loops who constantly call e
 ;	Date: 09-09-2019
 ;	Authors:
 ;		Roel de Vries
-;		Student name 2
+;		Anas Kwefati
 ;
 ;	Lab number 1
 ;	Title:	How to use the PORTS, digital IO, subroutine call
