@@ -90,8 +90,8 @@
 \begin{flushright}
 \begin{minipage}{\textwidth}
 \begin{flushleft} \large
-\emph{Author:}\textsc{}\\  % Author
-\emph{Supervisor:}  \textsc{} \\  % Author
+\emph{Author:}\textsc{Roel Di Vries, Anas Kwefati}\\  % Author
+\emph{Supervisor:}  \textsc{Anders Haggren} \\  % Author
 \emph{Semester:} Autumn 2019\\ % Semester
 \emph{Area:} Computer Science \\ % Area
 \emph{Course code:} 1DT301 % Course
@@ -198,9 +198,9 @@ For the second task the aim is to read switches and light to corresponding LED. 
 ;
 ;	Hardware: STK600, CPU ATmega 2560
 ;
-;	Function: Turn on Led n if switch n is pressed
+;	Function: Turn on LED n if SWITCH n is pressed
 ;
-;	Input ports: PORTA, used for the switches
+;	Input ports: PORTD, used for the switches
 ;
 ;	Output ports: PORTB, used for LEDS
 ;
@@ -221,6 +221,8 @@ For the second task the aim is to read switches and light to corresponding LED. 
 ;Load pre-configured files for the ports and memory adresses
 .include "m2560def.inc"
 
+;We first initialize everything 
+
 ldi r16, 0xFF ; load 0b1111 1111 to r16
 out DDRB, r16 ; we set the Data Direction Register B to be ready to give an output to turn on the light (0 is on and 1 is off) so now we are outputting 1
 
@@ -229,6 +231,8 @@ out DDRD, r17 ; we set the Data Direction Register D to take an input
 
 ldi r16, 0xFF ; 
 out PORTB, r16 ; we are setting the PORTB to give an output of 0b1111 1111 like that the light is off (for LED 0 is on and 1 is off) 
+
+;Initialization is finished
 
 ; we are creating an infinite loop to check if the switch port is on or off
 infinite_loop_switch:
