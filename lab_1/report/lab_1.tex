@@ -162,15 +162,27 @@ For the first task the goal was to get a light blinking. This was done by settin
 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 .include "m2560def.inc"
 
-main:
+main: 
 	SBI DDRB, 2
 	CBI PORTB, 2
+	
 \end{lstlisting}
+Here is the flowchart : 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width = 6cm, height=8cm]{flowchart/task1_flowchart.PNG}
+\end{center}
+\caption{Task 1 flowchart}
+\label{task1}
+\end{figure}
+\break
 
 
+
+%TASK2
 \section{Task 2}
-This is the code for the second task : 
-
+For the second task the aim is to read switches and light to corresponding LED. This was done by using a data direction register 
 \lstset{style=Asm}
 
 \begin{lstlisting}
@@ -206,28 +218,39 @@ This is the code for the second task :
 
 ;TASK_2
 
+;Load pre-configured files for the ports and memory adresses
 .include "m2560def.inc"
-ldi r16, 0xFF
-out DDRB, r16
-ldi r17, 0x00
-out DDRD, r17
 
-ldi r16, 0xFF
-out PORTB,r16
+ldi r16, 0xFF ; load 0b1111 1111 to r16
+out DDRB, r16 ; we set the Data Direction Register B to be ready to give an output to turn on the light (0 is on and 1 is off) so now we are outputting 1
 
+ldi r17, 0x00 ; we load 0b0000 0000 to the register 17
+out DDRD, r17 ; we set the Data Direction Register D to take an input  
 
-loop:
+ldi r16, 0xFF ; 
+out PORTB, r16 ; we are setting the PORTB to give an output of 0b1111 1111 like that the light is off (for LED 0 is on and 1 is off) 
 
-in r18, PIND
-ldi r20, 0xFF
-EOR r18, r20
-out PORTB, r18
+; we are creating an infinite loop to check if the switch port is on or off
+infinite_loop_switch:
 
-rjmp loop
+	in r18, PIND ; The input data received from the input PIND is stored in the register r18
+	out PORTB, r18 ;The PORTB will take the data of r18 and output it to the LED and turn on the light if it is correct 
+
+rjmp infinite_loop_switch ;we repeat the process
 
 
 \end{lstlisting}
 
+Here is the flowchart for this task : 
+\begin{figure}
+\begin{center}
+\includegraphics[width = 6cm, height=14cm]{flowchart/task2_flowchart.PNG}
+\end{center}
+\caption{Task 2 flowchart}
+\label{task2}
+\end{figure}
+
+\break
 
 \section{Task 3}
 In task 3 the goal was to turn on led 0, only if switch 5 was pressed. by checking if the bit for switch 5 is high we are able to turn the led on at the right moment
