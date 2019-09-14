@@ -163,15 +163,15 @@ For the first task the goal was to get a light blinking. This was done by settin
 .include "m2560def.inc"
 
 main: 
-	SBI DDRB, 2
-	CBI PORTB, 2
+	SBI DDRB, 2 ; set pin to output
+	CBI PORTB, 2; turn on led
 	
 \end{lstlisting}
 Here is the flowchart : 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width = 6cm, height=8cm]{flowchart/task1_flowchart.PNG}
+\includegraphics[width=\textwidth/3 ]{flowchart/task1_flowchart.png}
 \end{center}
 \caption{Task 1 flowchart}
 \label{task1}
@@ -248,7 +248,7 @@ rjmp infinite_loop_switch ;we repeat the process
 Here is the flowchart for this task : 
 \begin{figure}
 \begin{center}
-\includegraphics[width = 6cm, height=14cm]{flowchart/task2_flowchart.PNG}
+\includegraphics[width=\textwidth/3]{flowchart/task2_flowchart.png}
 \end{center}
 \caption{Task 2 flowchart}
 \label{task2}
@@ -291,21 +291,38 @@ In task 3 the goal was to turn on led 0, only if switch 5 was pressed. by checki
 .include "m2560def.inc"
 
 main:
-	SBI DDRB, 0 ; set output
-	CBI DDRA, 5 ; set input
+	SBI DDRB, 0 ; set bit 0 to output
+	CBI DDRA, 5 ; set bit 5 to input
 
 lightloop:
 
-	SBIS PINA, 5
-	CBI PORTB, 0
-	SBIC PINA, 5	
-	SBI PORTB, 0  
+	SBIS PINA, 5 ; check if button is pressed
+	CBI PORTB, 0 ; if so, turn on led.
+	SBIC PINA, 5 ; check if button is not pressed
+	SBI PORTB, 0 ; if so, turn off led.
 \end{lstlisting}
 
-\section{Task 4}
-In task 4 we needed to run the task 3 code in the simulator, as seen in the screenshots below, this worked.
+Here is the flowchart for this task : 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth/2 ]{flowchart/task3_flowchart.jpg}
+\end{center}
+\caption{Task 3 flowchart}
+\label{task3}
+\end{figure}
 
-TBD
+\break
+
+\section{Task 4}
+In task 4 we needed to run the task 3 code in the simulator. In the first screenshot you can see that PINA is low, and the LED is off, in the second screenshot a bit of PINA has been set to high, and the led has turned on as well. 
+
+\begin{center}
+\includegraphics[width=\textwidth ]{img/task4_1.png}
+Both the LED and the button are off.
+
+\includegraphics[width=\textwidth ]{img/task4_2.png}
+The switch, and with that also the LED, has turned on.
+\end{center}
 
 \section{Task 5}
 For task 5 we needed to create a ring counter. This was done by creating a loop which constantly shifts the PORTB register one sideways with a delay.
@@ -348,23 +365,21 @@ main:
 	ldi R20, low(RAMEND) ; R20 = low part of RAMEND address
 	out SPL,R20 ; SPL = low part of RAMEND address
 
-	LDI r20, 0xFF
-	OUT DDRB, r20
-	CBR r20, 1 ; set output
-	OUT PORTB, r20
+	LDI r20, 0xFE ; set all bits but the last one high
+	OUT PORTB, r20 ; move to led register
 	call timer
 
 lightloop:
-	LSL r20
-	BRCS setbit
+	LSL r20 ; shift bits one to the left
+	BRCS setbit ;set rightmost low bit to high if carry bit is set
 lightloopcont:
-	OUT PORTB, r20
+	OUT PORTB, r20 ; move to led register
 	call timer
-	call lightloop
+	call lightloop ; loop indefinitely
 
 setbit:
-	SBR r20, 1
-	CLC
+	SBR r20, 1 ; set bit high
+	CLC ; and clear carry bit so we can check again.
 	call lightloopcont
 
 timer:
@@ -383,6 +398,15 @@ L1: dec  r19
 
 \end{lstlisting}
 
+Here is the flowchart for this task : 
+\begin{center}
+\includegraphics[width=\textwidth/2 ]{flowchart/task5_flowchart.jpg}
+
+Task 5 flowchart
+\label{task5}
+\end{center}
+
+\break 
 \section{Task 6}
 The Johnson counter was created by using two smaller loops who constantly call eachother. the first which increases the amount of leds on, and a second which decreases the amount of leds on.
 
@@ -424,27 +448,26 @@ main:
 	ldi R21, low(RAMEND) ; R20 = low part of RAMEND address
 	out SPL,R21 ; SPL = low part of RAMEND address
 
-	CBR r16, 0; counter
-	SBR r17, 255; light state 
-	OUT DDRB, r17
-	ldi r16, 8
+	ldi r16, 8 ; set counter register
+	SBR r17, 255; set light state 
+	OUT DDRB, r17 ;move to led register
 
 incloop:
-	LSL r17
-	OUT PORTB, r17
+	LSL r17 ; shit register left
+	OUT PORTB, r17 ; and move it to led register
 	call timer
-	dec r16
-    brne incloop
+	dec r16 ; decrease counter
+    brne incloop ; once counter is finished, move on.
 	ldi r16, 8
 	call decloop
 
 decloop:
-	LSR r17
-	SBR r17, 128
-	OUT PORTB, r17
+	LSR r17 ; shit register right
+	SBR r17, 128 ;set leftmost bit high
+	OUT PORTB, r17 ; and move it to led register
 	call timer
 	dec r16
-    brne decloop
+    brne decloop ; once counter is finished, move on.
 	ldi r16, 8
 	call incloop
 
@@ -465,6 +488,14 @@ L1: dec  r20
 
 \end{lstlisting}
 
+
+Here is the flowchart for this task : 
+\begin{center}
+\includegraphics[width=\textwidth/3 ]{flowchart/task6_flowchart.jpg}
+
+Task 6 flowchart
+\label{task6}
+\end{center}
 
 % Prints your bibliography database xxx.bib
 \bibliographystyle{IEEEtran}
