@@ -2,22 +2,21 @@
 ; 1DT301, Computer Technology I
 ; Date: 2016-09-15
 ; Author:
-; Student name 1
+;	Anas Kwefati
 ; Student name 2
 ;
-; Lab number: 1
-; Title: How to use the PORTs. Digital input/output. Subroutine call.
+; Lab number: 2
+; Title: Subroutines
 ;
 ; Hardware: STK600, CPU ATmega2560
 ;
-; Function: Describe the function of the program, so that you can understand it,
-; even if you're viewing this in a year from now!
+; Function: Program that switches between Ring counter and Johnson counter.
+; 	No delay between the button is pressed and the change between Ring/Johnson.
+; 	Each time I press the button, the program should change counter.
+
+; Input ports: PORTA checks if we pressed the switch 0 (SW0; PA0).
 ;
-; Input ports: Describe the function of used ports, for example on-board switches
-; connected to PORTA.
-;
-; Output ports: Describe the function of used ports, for example on-board LEDs
-; connected to PORTB.
+; Output ports: PORTB turns on/off the light (LEDs)
 ;
 ; Subroutines: If applicable.
 ; Included files: m2560def.inc
@@ -35,8 +34,8 @@ out SPH,R21 ; SPH = high part of RAMEND address
 ldi R21, low(RAMEND) ; R20 = low part of RAMEND address
 out SPL,R21 ; SPL = low part of RAMEND address
 
-;we initialize 
-ldi r16, 0xFF ; 
+;we initialize
+ldi r16, 0xFF ;
 out DDRB, r16 ; we set the DDRB as output
 
 ldi r17, 0x00
@@ -49,12 +48,12 @@ ldi r20, 0b11111110 ;check if we pressed SW0
 ldi r19, 0b10111111 ;Turn on light at 0
 ldi r22,0x00
 
-loop:	
-	in r18, PINA ;we put the coming data received by the PIND(input) to r18 
+loop:
+	in r18, PINA ;we put the coming data received by the PIND(input) to r18
 	cp r20,r18 ; check if r20==r18
 	breq ring_counter
 	brne johnson_counter
- 
+
 
 ring_counter:
 	ldi r18, 0b11111110
@@ -71,7 +70,7 @@ ring_loop:
 	ldi r24,0xFF
 	cp r24, r18
 	breq ring_counter
-	
+
 	in r19, PINA
 	cp r20,r19
 	breq johnson_counter
@@ -81,7 +80,7 @@ ring_loop:
 
 rjmp loop ; we go back at the beginning of the infinite loop
 
-johnson_counter : 	
+johnson_counter :
 	ldi r19, 0b11111110 ;Turn on light at 0
 	ldi r22, 0x00
 
@@ -101,16 +100,16 @@ johnson_loop:
 
 rjmp loop ; we go back at the beginning of the infinite loop
 
-johnson : 
+johnson :
 	out PORTB, r22
 	ldi r22, 0b11111111
 	call Delay
 	ldi r19,0b10000000
 
-	more_john : 
+	more_john :
 		out PORTB, r19
 		ASR r19
-		call Delay 
+		call Delay
 		cp r19, r22
 		breq johnson_counter
 
@@ -120,7 +119,7 @@ johnson :
 		breq ring_counter
 
 	rjmp more_john
-	 
+
 
 
 Delay :
@@ -148,8 +147,8 @@ out SPH,R21 ; SPH = high part of RAMEND address
 ldi R21, low(RAMEND) ; R20 = low part of RAMEND address
 out SPL,R21 ; SPL = low part of RAMEND address
 
-;we initialize 
-ldi r16, 0xFF ; 
+;we initialize
+ldi r16, 0xFF ;
 out DDRB, r16 ; we set the DDRB as output
 
 ldi r17, 0x00
@@ -162,16 +161,16 @@ ldi r20, 0b11111110 ;check if we pressed SW0
 ldi r19, 0b10111111 ;Turn on light at 0
 ldi r22,0x00
 
-loop:	
-	in r18, PINA ;we put the coming data received by the PIND(input) to r18 
+loop:
+	in r18, PINA ;we put the coming data received by the PIND(input) to r18
 	cp r20,r18 ; check if r20==r18
 	breq ring_counter
 	brne johnson_counter
- 
+
 
 ring_counter:
 	ldi r18, 0b11111110
-	
+
 
 ring_loop:
 	out PORTB, r18 ;we put the value of r18 to PORTB which should turn on the light
@@ -184,7 +183,7 @@ ring_loop:
 	ldi r24,0xFF
 	cp r24, r18
 	breq ring_counter
-	
+
 	in r19, PINA
 	cp r20,r19
 	breq johnson_counter
@@ -194,7 +193,7 @@ ring_loop:
 
 rjmp loop ; we go back at the beginning of the infinite loop
 
-johnson_counter : 	
+johnson_counter :
 	ldi r19, 0b11111110 ;Turn on light at 0
 	ldi r22, 0x00
 
@@ -214,16 +213,16 @@ johnson_loop:
 
 rjmp loop ; we go back at the beginning of the infinite loop
 
-johnson : 
+johnson :
 	out PORTB, r22
 	ldi r22, 0b11111111
 	call Delay
 	ldi r19,0b10000000
 
-	more_john : 
+	more_john :
 		out PORTB, r19
 		ASR r19
-		call Delay 
+		call Delay
 		cp r19, r22
 		breq johnson_counter
 
@@ -233,7 +232,7 @@ johnson :
 		breq ring_counter
 
 	rjmp more_john
-	 
+
 
 
 Delay :
@@ -269,4 +268,3 @@ L1: dec  r24
     brne L1
     rjmp PC+1
 	ret
-

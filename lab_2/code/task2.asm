@@ -1,3 +1,30 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 1DT301, Computer Technology I
+; Date: 2016-09-15
+; Author:
+;	Anas Kwefati
+;
+; Lab number: 2
+; Title: Subroutines
+;
+; Hardware: STK600, CPU ATmega2560
+;
+; Function: Program that switches between Ring counter and Johnson counter.
+; 	No delay between the button is pressed and the change between Ring/Johnson.
+; 	Each time I press the button, the program should change counter.
+
+; Input ports: PORTA checks if we pressed the switch 0 (SW0; PA0).
+;
+; Output ports: PORTB turns on/off the light (LEDs)
+;
+; Subroutines: If applicable.
+; Included files: m2560def.inc
+;
+; Other information:
+;
+; Changes in program: (Description and date)
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 .include "m2560def.inc"
 
 ; Initialize SP, Stack Pointer
@@ -6,8 +33,8 @@ out SPH,R21 ; SPH = high part of RAMEND address
 ldi R21, low(RAMEND) ; R20 = low part of RAMEND address
 out SPL,R21 ; SPL = low part of RAMEND address
 
-;we initialize 
-ldi r16, 0xFF ; 
+;we initialize
+ldi r16, 0xFF ;
 out DDRB, r16 ; we set the DDRB as output
 
 ldi r17, 0x00
@@ -20,7 +47,7 @@ ldi r20, 1
 
 ldi r16, 0b11111111
 
-loop : 
+loop :
 	in r19,PINA
 	cp r19, r18
 	breq listening_loop
@@ -29,7 +56,7 @@ rjmp loop
 
 
 listening_loop :
-	inc r20 
+	inc r20
 	cpi r20, 7
 	breq reset
 	in r19, PINA
@@ -37,11 +64,11 @@ listening_loop :
 	breq random
 rjmp listening_loop
 
-reset : 
+reset :
 	ldi r20, 1
 	rjmp loop
-	
-random : 
+
+random :
 	cpi r20, 1
 	breq number_one
 	cpi r20, 2
@@ -81,5 +108,3 @@ number_six:
 	ldi r22, 0b00010001
 	out PORTB, r22
 rjmp loop
-
-	
