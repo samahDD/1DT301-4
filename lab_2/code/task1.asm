@@ -3,7 +3,6 @@
 ; Date: 2016-09-15
 ; Author:
 ;	Anas Kwefati
-; Student name 2
 ;
 ; Lab number: 2
 ; Title: Subroutines
@@ -39,57 +38,60 @@ ldi r16, 0xFF ;
 out DDRB, r16 ; we set the DDRB as output
 
 ldi r17, 0x00
-out DDRA, r17 ; we set as output
+out DDRA, r17 ; we set DDRA as input
 
 ldi r16, 0xFF ; we load 0b1111 1111 to the register r16
-out PORTA,r16 ; we set the PORTA to r16 SO it means that we put each light off
+out PORTB,r16 ; we set the PORTB to r16 SO it means that we put each light off
 
-ldi r20, 0b11111110 ;check if we pressed SW0
+ldi r20, 0b11111110 ;This register will be used to check if we pressed SW0
 ldi r19, 0b10111111 ;Turn on light at 0
 ldi r22,0x00
 
 loop:
-	in r18, PINA ;we put the coming data received by the PIND(input) to r18
-	cp r20,r18 ; check if r20==r18
-	breq ring_counter
-	brne johnson_counter
+	in r18, PINA ;we put the incoming data from PINA(input) to r18
+	cp r20,r18 ; we compare if r20 and r18
+	breq ring_counter ;if r18==r20 then go to ring_counter
+	brne johnson_counter ;otherwise johnson_counter
 
-
+;LED -> 0 == on and 1 == off
 ring_counter:
-	ldi r18, 0b11111110
+	ldi r18, 0b11111110 ;We load 1111 1110 to r18
 	call ring_loop
 
 ring_loop:
-	out PORTB, r18 ;we put the value of r18 to PORTB which should turn on the light
-	call Delay
-	com r18
-	LSL r18
-	com r18
+	out PORTB, r18 ;We output r18 to PORTB, like that LED0 turns on
+	call Delay ;We call the Delay
+	com r18 ;we take the complement of r18. So here it would be 0000 0001
+	LSL r18 ;We do a Logical Shift Left, it shifts all bits to the left.
+	;So here we would get for the first r18 : 0000 0010
+	com r18 ;we take the complement of r18, so we will get r18 = 1111 1101
 
 	;Check if everything is off if true then go to ring counter to make infinite loop
 	ldi r24,0xFF
-	cp r24, r18
-	breq ring_counter
+	cp r24, r18 ;compare r24 with r18
+	breq ring_counter ;if r24 == r18 go to ring_counter
 
+;We check if we pressed SW0, if yes we go to Johnson_counter
 	in r19, PINA
 	cp r20,r19
 	breq johnson_counter
 
-	rjmp ring_loop
+	rjmp ring_loop ;we repeat the ring_loop
 
 
 rjmp loop ; we go back at the beginning of the infinite loop
 
 johnson_counter :
-	ldi r19, 0b11111110 ;Turn on light at 0
+	ldi r19, 0b11111110 ;We load 1111 1110 to r19
 	ldi r22, 0x00
 
 johnson_loop:
-	out PORTB, r19
-	LSL r19
+	out PORTB, r19 ;We output r19 to PORTB, we turn the light LED0
+	LSL r19 ; we do a logical shift left, so for the first one we will get
+	; r19 = 1111 1100
 	call Delay
-	cp r19, r22
-	breq johnson
+	cp r19, r22 ;we compare r19 with r22 to check if all LEDs are turned ON
+	breq johnson ;if r19==r22 then go to johnson
 
 ;Check if PINA SW0 has been pressed if yes then it goes to ring counter
 	in r18, PINA
@@ -100,18 +102,20 @@ johnson_loop:
 
 rjmp loop ; we go back at the beginning of the infinite loop
 
+;We do the reverse
 johnson :
-	out PORTB, r22
-	ldi r22, 0b11111111
+	out PORTB, r22 ;Output r22 to PORTB, so all LEDs are turned ON
+	ldi r22, 0b11111111 ;Load 1111 1111 to r22
 	call Delay
-	ldi r19,0b10000000
+	ldi r19,0b10000000 ; Load 1000 0000 to r19
 
 	more_john :
-		out PORTB, r19
-		ASR r19
+		out PORTB, r19 ;Ouput r19 to PORTB, so LED7 is OFF and everything else is ON
+		ASR r19 ;We do an Arithmetic Shift Right, it shifts all bits to the Right
+		;So for the first one it will be r19 = 1100 0000
 		call Delay
-		cp r19, r22
-		breq johnson_counter
+		cp r19, r22 ;compare r19 and r22
+		breq johnson_counter ; if r19 == r22 go to johnson_counter to repeat the process
 
 ;Check if PINA SW0 has been pressed if yes then it goes to ring counter
 		in r18, PINA
@@ -135,136 +139,4 @@ L1: dec  r24
     brne L1
     dec  r21
     brne L1
-	ret
-
-
-
-.include "m2560def.inc"
-
-; Initialize SP, Stack Pointer
-ldi r21, HIGH(RAMEND) ; R20 = high part of RAMEND address
-out SPH,R21 ; SPH = high part of RAMEND address
-ldi R21, low(RAMEND) ; R20 = low part of RAMEND address
-out SPL,R21 ; SPL = low part of RAMEND address
-
-;we initialize
-ldi r16, 0xFF ;
-out DDRB, r16 ; we set the DDRB as output
-
-ldi r17, 0x00
-out DDRA, r17 ; we set as output
-
-ldi r16, 0xFF ; we load 0b1111 1111 to the register r16
-out PORTA,r16 ; we set the PORTA to r16 SO it means that we put each light off
-
-ldi r20, 0b11111110 ;check if we pressed SW0
-ldi r19, 0b10111111 ;Turn on light at 0
-ldi r22,0x00
-
-loop:
-	in r18, PINA ;we put the coming data received by the PIND(input) to r18
-	cp r20,r18 ; check if r20==r18
-	breq ring_counter
-	brne johnson_counter
-
-
-ring_counter:
-	ldi r18, 0b11111110
-
-
-ring_loop:
-	out PORTB, r18 ;we put the value of r18 to PORTB which should turn on the light
-	call Delay
-	com r18
-	LSL r18
-	com r18
-
-	;Check if everything is off if true then go to ring counter to make infinite loop
-	ldi r24,0xFF
-	cp r24, r18
-	breq ring_counter
-
-	in r19, PINA
-	cp r20,r19
-	breq johnson_counter
-
-	rjmp ring_loop
-
-
-rjmp loop ; we go back at the beginning of the infinite loop
-
-johnson_counter :
-	ldi r19, 0b11111110 ;Turn on light at 0
-	ldi r22, 0x00
-
-johnson_loop:
-	out PORTB, r19
-	LSL r19
-	call Delay
-	cp r19, r22
-	breq johnson
-
-;Check if PINA SW0 has been pressed if yes then it goes to ring counter
-	in r18, PINA
-	cp r20,r18
-	breq ring_counter
-
-	rjmp johnson_loop
-
-rjmp loop ; we go back at the beginning of the infinite loop
-
-johnson :
-	out PORTB, r22
-	ldi r22, 0b11111111
-	call Delay
-	ldi r19,0b10000000
-
-	more_john :
-		out PORTB, r19
-		ASR r19
-		call Delay
-		cp r19, r22
-		breq johnson_counter
-
-;Check if PINA SW0 has been pressed if yes then it goes to ring counter
-		in r18, PINA
-		cp r20,r18
-		breq ring_counter
-
-	rjmp more_john
-
-
-
-Delay :
-; Generated by delay loop calculator
-; at http://www.bretmulvey.com/avrdelay.html
-
-	ldi  r21, 5
-    ldi  r23, 20
-    ldi  r24, 175
-L1: dec  r24
-    brne L1
-    dec  r23
-    brne L1
-    dec  r21
-    brne L1
-	ret
-
-
-; Generated by delay loop calculator
-; at http://www.bretmulvey.com/avrdelay.html
-;
-; Delay 4 050 000 cycles
-; 500ms at 8.1 MHz
-
-    ldi  r21, 21
-    ldi  r23, 140
-    ldi  r24, 174
-L1: dec  r24
-    brne L1
-    dec  r23
-    brne L1
-    dec  r21
-    brne L1
-    rjmp PC+1
 	ret

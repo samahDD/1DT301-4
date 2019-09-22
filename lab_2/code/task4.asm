@@ -10,8 +10,8 @@
 ;
 ; Hardware: STK600, CPU ATmega2560
 ;
-; Function: Describe the function of the program, so that you can understand it,
-; even if you're viewing this in a year from now!
+; Function: Ring Counter program with a different delay, with a number of ms transferred to
+;register pair r25:24
 ;
 ; Input ports: Describe the function of used ports, for example on-board switches
 ; connected to PORTA.
@@ -64,12 +64,13 @@ Delay :
 
 	;The lower byte of the 16-bit-adress is located in the lower register, the higher byte in the upper register. Both parts have their own names, e.g. the higher byte of Z is named ZH (=R31), the lower Byte is ZL (=R30).
 	;These names are defined in the standard header file for the chips. Dividing these 16-bit-pointer-names into two different bytes is done like follows:
-	ldi r25, HIGH(nbrExecution) ; We set the Most Significant Bit at the address nbrExecution
-	ldi r24, LOW(nbrExecution) ; We set the Least Significant Bit at the address nbrExecution
+	ldi r25, HIGH(nbrExecution) ; We load the Most Significant Bit register with the upper byte from the address nbrExecution
+	ldi r24, LOW(nbrExecution) ; We set the Least Significant Bit register with the lower byte from the address nbrExecution
 
 	wait_milliseconds :
 		rcall sub_delay ;we call the sub_delay that contains 1ms that is going to be repeated 1000 times to do 1s
 		sbiw r24, 1 ; By doing that we substract 1 from the register pair r25:r24
+		;We decrease the double register value by 1
 		;The instruction "SBIW R24,1" decreases the register pair word-wise. That means that whenever the LSB (Least Significant Bit r24) underflows, the MSB(Most Significant Bit r25) is also automatically reduced by 1.
 		brne wait_milliseconds ; if not zero start loop again, if zero continue
 

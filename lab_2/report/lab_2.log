@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  22 SEP 2019 12:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  22 SEP 2019 18:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -486,70 +486,66 @@ File: lstlang2.sty 2015/06/04 1.6 listings language file
 (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2015/06/04 1.6 listings language file
 )
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 136.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 134.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 137.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 135.
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 168.
- [1] [2] [3]
-<flowchart/task1_flowchart.png, id=29, 181.67876pt x 322.20375pt>
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 165.
+ [1] [2]
+<flowchart/task1_flowchart.png, id=26, 554.3109pt x 550.6974pt>
 File: flowchart/task1_flowchart.png Graphic file (type png)
 <use flowchart/task1_flowchart.png>
-Package pdftex.def Info: flowchart/task1_flowchart.png  used on input line 284.
+Package pdftex.def Info: flowchart/task1_flowchart.png  used on input line 283.
 
-(pdftex.def)             Requested size: 142.26378pt x 252.3061pt.
-
+(pdftex.def)             Requested size: 426.79135pt x 424.0299pt.
+ [3]
 [4 <./flowchart/task1_flowchart.png>] [5] [6]
-<flowchart/task2_flowchart.png, id=41, 236.885pt x 559.08875pt>
+<flowchart/task2_flowchart.png, id=41, 570.933pt x 771.1209pt>
 File: flowchart/task2_flowchart.png Graphic file (type png)
 <use flowchart/task2_flowchart.png>
-Package pdftex.def Info: flowchart/task2_flowchart.png  used on input line 415.
+Package pdftex.def Info: flowchart/task2_flowchart.png  used on input line 423.
 
-(pdftex.def)             Requested size: 142.26378pt x 335.77147pt.
- [7 <./flowchart/task2_flowchart.png>] [8] [9]
-<flowchart/task3_flowchart.jpg, id=52, 606.265pt x 419.5675pt>
-File: flowchart/task3_flowchart.jpg Graphic file (type jpg)
-<use flowchart/task3_flowchart.jpg>
-Package pdftex.def Info: flowchart/task3_flowchart.jpg  used on input line 515.
+(pdftex.def)             Requested size: 426.79135pt x 576.45663pt.
+ [7] [8 <./flowchart/task2_flowchart.png>] [9]
+<flowchart/task3_flowchart.png, id=52, 187.1793pt x 794.2473pt>
+File: flowchart/task3_flowchart.png Graphic file (type png)
+<use flowchart/task3_flowchart.png>
+Package pdftex.def Info: flowchart/task3_flowchart.png  used on input line 530.
 
-(pdftex.def)             Requested size: 213.39568pt x 147.68309pt.
- [10 <./flowchart/task3_flowchart.jpg>] [11]
-<flowchart/task5_flowchart.jpg, id=60, 463.7325pt x 805.0075pt>
-File: flowchart/task5_flowchart.jpg Graphic file (type jpg)
-<use flowchart/task5_flowchart.jpg>
-Package pdftex.def Info: flowchart/task5_flowchart.jpg  used on input line 632.
+(pdftex.def)             Requested size: 142.26378pt x 603.67058pt.
+ [10] [11 <./flowchart/task3_flowchart.png>] [12] [13]
+<flowchart/task4_flowchart.png, id=67, 304.2567pt x 477.7047pt>
+File: flowchart/task4_flowchart.png Graphic file (type png)
+<use flowchart/task4_flowchart.png>
+Package pdftex.def Info: flowchart/task4_flowchart.png  used on input line 637.
 
-(pdftex.def)             Requested size: 213.39568pt x 370.44307pt.
- [12 <./flowchart/task5_flowchart.jpg>]
+(pdftex.def)             Requested size: 426.79135pt x 670.10135pt.
+
 No file lab_2.bbl.
-(./lab_2.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[14 <./flowchart/task4_flowchart.png>] (./lab_2.aux) ) 
 Here is how much of TeX's memory you used:
- 7496 strings out of 492649
- 102609 string characters out of 6129621
- 538761 words of memory out of 5000000
- 11215 multiletter control sequences out of 15000+600000
+ 7493 strings out of 492649
+ 102588 string characters out of 6129621
+ 524621 words of memory out of 5000000
+ 11213 multiletter control sequences out of 15000+600000
  40943 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,12n,47p,812b,2050s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2018/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2
-018/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texm
-f-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2018/texmf-dist/
-fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
-1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/time
-s/utmri8a.pfb>
-Output written on lab_2.pdf (14 pages, 800838 bytes).
+ 37i,12n,47p,812b,2052s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/
+texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2018/texmf-dist/font
+s/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
+urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/cour
+ier/ucrro8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8
+a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></us
+r/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on lab_2.pdf (16 pages, 1546370 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+ 94 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
