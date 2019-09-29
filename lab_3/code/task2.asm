@@ -100,6 +100,7 @@ rjmp ring_loop
 johnson_counter :
 	ldi r19, 0b11111110 ;Turn on light at 0
 
+	;WE COMPARE
 	cp r25, r16 ;We compare r25 with 0b1111 1111(r16)
 	breq ring_counter ;if r25 == r16 so it goes to ring_counter
 	;if we press the SW0 and r25 becomes 0b1111 1111 because of the Int0
