@@ -1,17 +1,34 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 1DT301, Computer Technology I
+; Date: 2016-09-15
+; Author:
+;	Anas Kwefati
 ;
-; lab3.asm
+; Lab number: 3
+; Title: Interrupts
 ;
-; Created: 2019-09-23 13:41:25
-; Author : ak223wd
+; Hardware: STK600, CPU ATmega2560
 ;
-
-
+; Function: The program switches between Ring Counter and Johnson counter
+;We have to do this using interrupt when we push the button SW0 connected to PORTD
+;
+; Input ports: PORTD checks if we pressed the button
+;
+; Output ports: PORTB turns on/off the light (LEDs)
+;
+; Subroutines: If applicable.
+; Included files: m2560def.inc
+;
+; Other information:
+;
+; Changes in program: (Description and date)
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 .include "m2560def.inc"
-;The term VECTOR means nothing more than that each interrupt has its specific address where it jumps to. 
+;The term VECTOR means nothing more than that each interrupt has its specific address where it jumps to.
 ; The term TABLE means it is a list of jump instructions. This is a list of rjmp or jmp instructions, sorted by interrupt priority
 
 .org 0x00 ;This is the location that the program will start executing from
-rjmp start 
+rjmp start
 
 .org INT0addr
 rjmp interrupt
@@ -26,8 +43,8 @@ start:
 
 
 
-	;Main program initialization 
-	ldi r16, 0xFF ; 
+	;Main program initialization
+	ldi r16, 0xFF ;
 	out DDRB, r16 ; we set the DDRB as output
 
 
@@ -36,25 +53,29 @@ start:
 
 
 	ldi r17, 0b00000010 ;We define the type of signals that activates the external interrupt , here we set it as falling edge to activate the interrupt
-	sts EICRA, r17 ;we configure when to switch the external interrupt 
+	sts EICRA, r17 ;we configure when to switch the external interrupt
 
 	sei ;enabling all interrupts
 
-ldi r25, 0b11111111 ;START
+ldi r25, 0b11111111 ;This will be changed thanks to the INT0 and com 25
 
-ldi r16, 0b11111111
-ldi r22, 0b00000000
+ldi r16, 0b11111111 ;r16 will be used to compare with r25
+ldi r22, 0b00000000 ;r22 will be used to compare with r25
 
 main_program:
-	cp r25, r16
-	breq ring_counter		
+	cp r25, r16 ;we compare 0b1111 1111(r25) with 0b1111 1111 (r16)
+	breq ring_counter ;if r25 == r16 go to ring_counter
 rjmp main_program
- 
+
+;NORMAL RING_COUNTER
 ring_counter:
 	ldi r18, 0b11111110
+
 	;WE COMPARE
-	cp r25, r22 ;0000 0000
-	breq johnson_counter
+	cp r25, r22 ;We compare r25 with 0b0000 0000 (r22)
+	breq johnson_counter ;if r25 == r22 so we go to johnson_counter
+	;if we press the SW0 and r25 becomes 0b0000 0000 because of the Int0
+	;it will go to johnson_counter
 
 ring_loop:
 	out PORTB, r18 ;we put the value of r18 to PORTB which should turn on the light
@@ -69,19 +90,22 @@ ring_loop:
 	breq ring_counter
 
 	;WE COMPARE
-	cp r25, r22 ;0000 0000
-	breq johnson_counter
-
+	cp r25, r22 ;We compare r25 with 0b0000 0000 (r22)
+	breq johnson_counter ;if r25 == r22 so we go to johnson_counter
+	;if we press the SW0 and r25 becomes 0b0000 0000 because of the Int0
+	;it will go to johnson_counter
 
 rjmp ring_loop
 
-johnson_counter : 	
+johnson_counter :
 	ldi r19, 0b11111110 ;Turn on light at 0
-	
-	cp r25, r16 ;1111 1111
-	breq ring_counter
 
-	ldi r22, 0x00
+	cp r25, r16 ;We compare r25 with 0b1111 1111(r16)
+	breq ring_counter ;if r25 == r16 so it goes to ring_counter
+	;if we press the SW0 and r25 becomes 0b1111 1111 because of the Int0
+	;it will go to ring_counter
+
+	ldi r22, 0x00 ;we load back 0b0000 0000 to r22 to not mess with the one of ring_counter
 
 johnson_loop:
 	out PORTB, r19
@@ -91,22 +115,24 @@ johnson_loop:
 	breq johnson
 
 	;WE COMPARE
-	cp r25, r16 ;1111 1111
-	breq ring_counter
+	cp r25, r16 ;We compare r25 with 0b1111 1111(r16)
+	breq ring_counter ;if r25 == r16 so it goes to ring_counter
+	;if we press the SW0 and r25 becomes 0b1111 1111 because of the Int0
+	;it will go to ring_counter
 
 	rjmp johnson_loop
 
 
-johnson : 
+johnson :
 	out PORTB, r22
 	ldi r22, 0b11111111
 	call Delay
 	ldi r19,0b10000000
 
-	more_john : 
+	more_john :
 		out PORTB, r19
 		ASR r19
-		call Delay 
+		call Delay
 		cp r19, r22
 		breq johnson_counter
 
@@ -118,7 +144,9 @@ johnson :
 
 
  interrupt:
-	com r25	;we take the completement
+	com r25	;Whenever we press the button SW0, it takes the inverse.
+	;So at first r25 is 0b1111 1111, then we press the button SW0
+	;r25 becomes 0b0000 0000 and so on. By doing that we can compare it to r16 and r22
 reti
 
 
@@ -136,7 +164,3 @@ L1: dec  r24
     dec  r21
     brne L1
 	ret
-
-
-
-	 

@@ -1,17 +1,37 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 1DT301, Computer Technology I
+; Date: 2016-09-15
+; Author:
+;	Anas Kwefati
 ;
-; lab3.asm
+; Lab number: 3
+; Title: Interrupts
 ;
-; Created: 2019-09-23 13:41:25
-; Author : ak223wd
+; Hardware: STK600, CPU ATmega2560
 ;
-
+; Function: The program should simulate the rear lights on a car.
+; Normal Light -> LED 0,1,6 and 7 are ON
+; Turning Right -> LED 6,7 are ON and from LED 3 to 0 blinking as RING counter
+; Turning Left -> LED 0, 1 are ON and from LED 4 to 7 blinking as RING counter
+;
+; Input ports: PORTD checks if we pressed the button
+;
+; Output ports: PORTB turns on/off the light (LEDs)
+;
+; Subroutines: If applicable.
+; Included files: m2560def.inc
+;
+; Other information:
+;
+; Changes in program: (Description and date)
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 .include "m2560def.inc"
-;The term VECTOR means nothing more than that each interrupt has its specific address where it jumps to. 
+;The term VECTOR means nothing more than that each interrupt has its specific address where it jumps to.
 ; The term TABLE means it is a list of jump instructions. This is a list of rjmp or jmp instructions, sorted by interrupt priority
 
 .org 0x00 ;This is the location that the program will start executing from
-rjmp start 
+rjmp start
 
 .org INT0addr
 rjmp interrupt_0
@@ -32,8 +52,8 @@ start:
 
 
 
-	;Main program initialization 
-	ldi r16, 0xFF ; 
+	;Main program initialization
+	ldi r16, 0xFF ;
 	out DDRB, r16 ; we set the DDRB as output
 
 
@@ -42,20 +62,21 @@ start:
 
 
 	ldi r17, 0b00101010 ;We define the type of signals that activates the external interrupt , here we set it as falling edge to activate the interrupt
-	sts EICRA, r17 ;we configure when to switch the external interrupt 
+	sts EICRA, r17 ;we configure when to switch the external interrupt
 
 	sei ;enabling all interrupts
 
-	ldi r19,0b00111100 ;normal light 
-	
+	ldi r19,0b00111100 ;normal light
+
 	ldi r26, 0b00000011
 	ldi r22, 0b11000000
 
-	ldi r17, 3
+	ldi r17, 3 ;we load 3 to r17, this r17 will be used to know which button has been pressed
 
 main_program:
-	cpi r17, 1
-	breq left_blink_counter
+
+	cpi r17, 1 ;we compare as constant r17 with 1
+	breq left_blink_counter ; if r17 == 1 go to left_blink_counter
 
 	cpi r17, 2
 	breq right_blink_counter
@@ -65,33 +86,40 @@ main_program:
 
 rjmp main_program
 
-normal_light : 
-	out PORTB, r19	
-	;COMPARE 
-	cpi r17,1
+normal_light :
+	out PORTB, r19 ;output r19(0b0011 1100) through PORTB, to turn light
+
+	;COMPARE
+	cpi r17,1 ;if we pressed the button for left then goes there
 	breq left_blink_counter
 
-	cpi r17,2
+	cpi r17,2 ;same idea
 	breq right_blink_counter
 
-rjmp normal_light
+rjmp normal_light ;rejump this until we press something
 
 left_blink_counter:
 	ldi r18, 0b11101111
+
 	;WE COMPARE
 	cpi r17,2
 	breq right_blink_counter
 
 left_loop:
-	mov r20,r18
-	sub r20, r26 
-	out PORTB, r20 ;we put the value of r18 to PORTB which should turn on the light
-	
+	mov r20,r18 ;copy r18 to r20 to not mess with r18
+	sub r20, r26 ;Substract r20 with r26 (0b0000 0011)
+	;we do this like that we will be able to turn on the light at LED0 and LED1
+	;For example : 1110 1111 - 0000 0011 = 1110 1100
+	;Like that it turns at LED0 and LED1 and doesn't change with the rest of the code
+	;So it is a fixed value when we output it in PORTB
+
+	out PORTB, r20 ;we put the value of r20 to PORTB which should turn on the light
+
 	call Delay
 	com r18
 	LSL r18
 	com r18
-		
+
 
 	;Check if everything is off if true then go to ring counter to make infinite loop
 	ldi r24,0xFF
@@ -109,14 +137,9 @@ left_loop:
 rjmp left_loop
 
 
-left_light :
-	ldi r16, 0b00111111
-	out PORTB, r16
-	ret
-
-
 right_blink_counter:
 	ldi r18, 0b11110111
+
 	;WE COMPARE
 	cpi r17,1
 	breq left_blink_counter
@@ -124,8 +147,8 @@ right_blink_counter:
 
 right_loop:
 	mov r25,r18
-	sub r25, r22 
-	out PORTB, r25 ;we put the value of r18 to PORTB which should turn on the light
+	sub r25, r22
+	out PORTB, r25 ;we put the value of r25 to PORTB which should turn on the light
 	call Delay
 	com r18
 	LSR r18
@@ -145,22 +168,18 @@ right_loop:
 
 rjmp right_loop
 
-
+;INTERRUPTS
 interrupt_0:
-	ldi r17, 3
-	
+	ldi r17, 3 ;we load 3 to r17 when we press the correct button
+
 reti
 
 left_blink:
 	ldi r17, 1
-
 reti
- 
 
 right_blink:
 	ldi r17, 2
-
-	
 reti
 
 Delay :
@@ -177,7 +196,3 @@ L1: dec  r24
     dec  r21
     brne L1
 	ret
-
-
-
-	 

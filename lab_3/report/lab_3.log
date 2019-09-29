@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  29 SEP 2019 16:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  29 SEP 2019 18:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -466,10 +466,7 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 125.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 125.
- (./lab_3.toc
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 3.
-)
+ (./lab_3.toc)
 \tf@toc=\write3
 \openout3 = `lab_3.toc'.
 
@@ -494,58 +491,62 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 135.
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 165.
- [1] [2]
-<flowchart/task1_flowchart.png, id=26, 554.3109pt x 550.6974pt>
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 175.
+ [1]
+<flowchart/task1_flowchart.png, id=23, 554.3109pt x 550.6974pt>
 File: flowchart/task1_flowchart.png Graphic file (type png)
 <use flowchart/task1_flowchart.png>
-Package pdftex.def Info: flowchart/task1_flowchart.png  used on input line 283.
+Package pdftex.def Info: flowchart/task1_flowchart.png  used on input line 217.
 
 (pdftex.def)             Requested size: 426.79135pt x 424.0299pt.
- [3]
-[4 <./flowchart/task1_flowchart.png>] [5] [6]
+ [2] [3 <./flowchart/task1_flowchart.png>] [4] [5] [6]
 <flowchart/task2_flowchart.png, id=41, 570.2103pt x 771.8436pt>
 File: flowchart/task2_flowchart.png Graphic file (type png)
 <use flowchart/task2_flowchart.png>
-Package pdftex.def Info: flowchart/task2_flowchart.png  used on input line 423.
+Package pdftex.def Info: flowchart/task2_flowchart.png  used on input line 402.
 
 (pdftex.def)             Requested size: 426.79135pt x 577.7271pt.
- [7] [8 <./flowchart/task2_flowchart.png>] [9]
-<flowchart/task3_flowchart.png, id=52, 187.1793pt x 794.2473pt>
+ [7] [8 <./flowchart/task2_flowchart.png>] [9] [10] [11]
+<flowchart/task3_flowchart.png, id=59, 187.1793pt x 794.2473pt>
 File: flowchart/task3_flowchart.png Graphic file (type png)
 <use flowchart/task3_flowchart.png>
-Package pdftex.def Info: flowchart/task3_flowchart.png  used on input line 530.
+Package pdftex.def Info: flowchart/task3_flowchart.png  used on input line 619.
 
 (pdftex.def)             Requested size: 142.26378pt x 603.67058pt.
- [10] [11 <./flowchart/task3_flowchart.png>] [12] [13]
-<flowchart/task4_flowchart.png, id=67, 304.2567pt x 477.7047pt>
+ [12] [13 <./flowchart/task3_flowchart.png>] [14] [15]
+[16] [17] [18]
+<flowchart/task4_flowchart.png, id=83, 304.2567pt x 477.7047pt>
 File: flowchart/task4_flowchart.png Graphic file (type png)
 <use flowchart/task4_flowchart.png>
-Package pdftex.def Info: flowchart/task4_flowchart.png  used on input line 636.
+Package pdftex.def Info: flowchart/task4_flowchart.png  used on input line 900.
 
 (pdftex.def)             Requested size: 426.79135pt x 670.10135pt.
 
 No file lab_3.bbl.
-[14 <./flowchart/task4_flowchart.png>] (./lab_3.aux) ) 
+[19 <./flowchart/task4_flowchart.png>] (./lab_3.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 7493 strings out of 492649
- 102588 string characters out of 6129621
- 515621 words of memory out of 5000000
- 11213 multiletter control sequences out of 15000+600000
- 40943 words of font info for 50 fonts, out of 8000000 for 9000
+ 7512 strings out of 492649
+ 102835 string characters out of 6129621
+ 505587 words of memory out of 5000000
+ 11233 multiletter control sequences out of 15000+600000
+ 38140 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,12n,47p,812b,2052s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/
-texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2018/texmf-dist/font
-s/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
-urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/cour
-ier/ucrro8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8
-a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></us
-r/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on lab_3.pdf (16 pages, 1545154 bytes).
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2018/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2
+018/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/time
+s/utmri8a.pfb>
+Output written on lab_3.pdf (21 pages, 1552423 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
+ 110 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
