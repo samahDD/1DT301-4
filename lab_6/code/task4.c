@@ -38,7 +38,7 @@
 #define POSSIBLE_DIGIT_TO_CHOOSE_LINE "123" //TASK4
 
 //#define POSSIBLE_DIGIT_TO_CHOOSE_LINE "123456789" //TASK 5
-//#define MAX_LINES 9 //TASK 5 and uncomment the 2 other for TASK 4
+//#define MAX_LINES 9 //TASK 5 and comment the 2 other for TASK 4
 
 void uart_int(void);
 void toPutty(unsigned char data);
