@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  21 OCT 2019 00:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  24 OCT 2019 14:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -494,12 +494,16 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 148.
  [1] [2]
-<flowchart/task1_flowchart.png, id=24, 534.0753pt x 435.0654pt>
+<flowchart/task1_flowchart.png, id=24, 568.0422pt x 531.1845pt>
 File: flowchart/task1_flowchart.png Graphic file (type png)
 <use flowchart/task1_flowchart.png>
 Package pdftex.def Info: flowchart/task1_flowchart.png  used on input line 231.
 
-(pdftex.def)             Requested size: 426.79135pt x 347.67438pt.
+(pdftex.def)             Requested size: 426.79135pt x 399.10063pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--243
+
+ []
 
 [3 <./flowchart/task1_flowchart.png>] [4] [5]
 <flowchart/task2_flowchart.png, id=36, 531.1845pt x 511.6716pt>
@@ -515,14 +519,22 @@ File: flowchart/task3_flowchart.png Graphic file (type png)
 Package pdftex.def Info: flowchart/task3_flowchart.png  used on input line 468.
 
 (pdftex.def)             Requested size: 213.39568pt x 339.56909pt.
- [9 <./flowchart/task3_flowchart.png>] [10]
+ [9 <./flowchart/task3_flowchart.png>] [10] [11] [12] [13]
+<flowchart/task4_flowchart.png, id=65, 1008.1665pt x 1567.5363pt>
+File: flowchart/task4_flowchart.png Graphic file (type png)
+<use flowchart/task4_flowchart.png>
+Package pdftex.def Info: flowchart/task4_flowchart.png  used on input line 753.
+
+(pdftex.def)             Requested size: 426.79135pt x 663.57503pt.
+ [14]
+[15 <./flowchart/task4_flowchart.png>]
 No file lab_6.bbl.
-[11] (./lab_6.aux) ) 
+[16] (./lab_6.aux) ) 
 Here is how much of TeX's memory you used:
- 7121 strings out of 492649
- 99026 string characters out of 6129621
- 482545 words of memory out of 5000000
- 10850 multiletter control sequences out of 15000+600000
+ 7188 strings out of 492649
+ 100214 string characters out of 6129621
+ 499536 words of memory out of 5000000
+ 10916 multiletter control sequences out of 15000+600000
  42764 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,12n,56p,812b,1739s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -531,10 +543,10 @@ Here is how much of TeX's memory you used:
 pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/
 local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texl
 ive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on lab_6.pdf (13 pages, 1027866 bytes).
+Output written on lab_6.pdf (18 pages, 1701536 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 92 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
