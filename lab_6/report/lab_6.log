@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  24 OCT 2019 14:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.14)  24 OCT 2019 23:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -520,21 +520,21 @@ Package pdftex.def Info: flowchart/task3_flowchart.png  used on input line 468.
 
 (pdftex.def)             Requested size: 213.39568pt x 339.56909pt.
  [9 <./flowchart/task3_flowchart.png>] [10] [11] [12] [13]
-<flowchart/task4_flowchart.png, id=65, 1008.1665pt x 1567.5363pt>
+<flowchart/task4_flowchart.png, id=65, 1008.8892pt x 1535.7375pt>
 File: flowchart/task4_flowchart.png Graphic file (type png)
 <use flowchart/task4_flowchart.png>
-Package pdftex.def Info: flowchart/task4_flowchart.png  used on input line 753.
+Package pdftex.def Info: flowchart/task4_flowchart.png  used on input line 750.
 
-(pdftex.def)             Requested size: 426.79135pt x 663.57503pt.
+(pdftex.def)             Requested size: 426.79135pt x 649.66861pt.
  [14]
 [15 <./flowchart/task4_flowchart.png>]
 No file lab_6.bbl.
 [16] (./lab_6.aux) ) 
 Here is how much of TeX's memory you used:
- 7188 strings out of 492649
- 100214 string characters out of 6129621
- 499536 words of memory out of 5000000
- 10916 multiletter control sequences out of 15000+600000
+ 7187 strings out of 492649
+ 100203 string characters out of 6129621
+ 538536 words of memory out of 5000000
+ 10915 multiletter control sequences out of 15000+600000
  42764 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,12n,56p,812b,1739s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -543,7 +543,7 @@ Here is how much of TeX's memory you used:
 pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/
 local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texl
 ive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on lab_6.pdf (18 pages, 1701536 bytes).
+Output written on lab_6.pdf (18 pages, 1694166 bytes).
 PDF statistics:
  92 PDF objects out of 1000 (max. 8388607)
  55 compressed objects within 1 object stream

@@ -59,33 +59,33 @@ char lines[8][24] = { "", "", "", "", "", "", "", "" };//8ROWS 24COLUMNS
 
 int main(void)
 {
-	uart_int();
-	setUpToDisplayOnLCD();
-	
-	while (1) {
-		char character = getChar(); // We get the input from terminal
+    uart_int();
+    setUpToDisplayOnLCD();
+    
+    while (1) {
+        char character = getChar(); // We get the input from terminal
 
         //IF SELECT A LINE WE WAIT FOR A VALID DIGIT that is >= 1
-		if (selectionOfLine == true) {
+        if (selectionOfLine == true) {
             if (character < '1') {
                 continue; // If character <1 do nothing
             }
-			// We check if the digit that the user has put is in what is possible
-			if (possibleCharacter(POSSIBLE_DIGIT_TO_CHOOSE_LINE, character)) {
-                int convertCharToInt = character - '0'; //convert char to int
+            // We check if the digit that the user has put is in what is possible
+            if (possibleCharacter(POSSIBLE_DIGIT_TO_CHOOSE_LINE, character)) {
+                int convertCharToInt = character - '1'; //convert char to int
                 /*LOGIC behind the conversion :
                  char c = '2';
                  int i = c - '0';
                  it will take the ASCII value of charactter 2 (50) and 0 (48)
                  Then it will substract them -> int i = 50 - 48 which gives us 2
                  */
-				changeLine(convertCharToInt); //call the method to choose the possible line. Change currentLine by the targetLine (here "convertCharToInt")
-				
+                changeLine(convertCharToInt); //call the method to choose the possible line. Change currentLine by the targetLine (here "convertCharToInt")
+                
                 selectionOfLine = false; //False
-			}
-		}
-		else {
-			
+            }
+        }
+        else {
+            
             if (character == '>'){
                 
                 selectionOfLine = true; //Make selectionOfLine true
@@ -95,16 +95,16 @@ int main(void)
                 changeLine(-1); // We increment currentLine and we go to the next line
                 
             } else {
-				// Add character to the end of the selected line
-				char* line = lines[currentLine];
+                // Add character to the end of the selected line
+                char* line = lines[currentLine];
                 
-				sprintf(line, "%s%c", line, character);
-			}
-		}
-		setUpToDisplayOnLCD(); // Update the screen
-	}
+                sprintf(line, "%s%c", line, character);
+            }
+        }
+        setUpToDisplayOnLCD(); // Update the screen
+    }
 
-	return 0;
+    return 0;
 }
 
 
@@ -112,36 +112,36 @@ int main(void)
 //METHOD TO DISPLAY ON THE SCREEN
 void improvedtoDisplayOnLCD(char addressLine, char* specialCommand, char* stringChar){
     
-	//we get the length of special command which is "O0001"
+    //we get the length of special command which is "O0001"
     //and we get the length of the specific message in stringChar
-	int specialCommandLen = sizeof(specialCommand);
-	int stringCharLen = sizeof(stringChar);
+    int specialCommandLen = strlen(specialCommand);
+    int stringCharLen = strlen(stringChar);
     
-	char* toDisplay = malloc(1 + specialCommandLen + stringCharLen + 3);//give a length of specialCommand and stringCharLen and allocate a bit more memory with malloc for the end case. We allocate memory for toDisplay
+    char* toDisplay = malloc(1 + specialCommandLen + stringCharLen + 3);//give a length of specialCommand and stringCharLen and allocate a bit more memory with malloc for the end case. We allocate memory for toDisplay
 
-	// ADD EVERYTHING TOGETHER in toDiplsay
+    // ADD EVERYTHING TOGETHER in toDiplsay
     //So we get \rADDRESSLINE_SPECIALCOMMAND_STRINGCHAR
     //For example \rAO0001a"
-	sprintf(toDisplay, "\r%c%s%s", addressLine, specialCommand, stringChar);
+    sprintf(toDisplay, "\r%c%s%s", addressLine, specialCommand, stringChar);
 
-	
+    
     int checksum = 0;
     // We calculate checksum to make sure that everything is in it
-	for (int i = 0; (toDisplay[i] != 0); i++){
-		checksum += toDisplay[i];
-	}
-	
-	checksum %= 256;
+    for (int i = 0; (toDisplay[i] != 0); i++){
+        checksum += toDisplay[i];
+    }
+    
+    checksum %= 256;
 
-	sprintf(toDisplay, "%s%02X\n", toDisplay, checksum);//%02x means print at least 2 digits, prepends it with 0's if there's less.
+    sprintf(toDisplay, "%s%02X\n", toDisplay, checksum);//%02x means print at least 2 digits, prepends it with 0's if there's less.
     //%02x is used to convert one character to a hexadecimal string
 
-	for (int i = 0; (toDisplay[i] != 0); i++){
-		toPutty(toDisplay[i]);
-	}
-	
+    for (int i = 0; (toDisplay[i] != 0); i++){
+        toPutty(toDisplay[i]);
+    }
+    
 
-	free(toDisplay); // free toDisplay deallocate the space used by malloc()
+    free(toDisplay); // free toDisplay deallocate the space used by malloc()
 }
 
 void endToDisplayOnLCD(){
@@ -156,35 +156,34 @@ void endToDisplayOnLCD(){
 //METHOD TO SETUP CHARACTERS FOR EACH LINE
 void setUpToDisplayOnLCD(){
     
-	//Take currentLine and see if it is <1 if yes then increment lineToDisplay
-	int lineToDisplay = currentLine;
+    //Take currentLine and see if it is <1 if yes then increment lineToDisplay
+    int lineToDisplay = currentLine;
     
     if (lineToDisplay < 1){
         lineToDisplay++;
     }
-	
-	
-	//Set up for first and second rows
-	char memory_space_A[48] = "";
     
-	//char line_selected = selectionOfLine ? '_' : (currentLine + '0');
     
-    //If ChooseALine is True then add '_' to choosenLine otherwise the currentLine
+    //Set up for first and second rows
+    char memory_space_A[48] = "";
+    
+    
+    //If selectionOfLine is True then add '_' to choosenLine otherwise the currentLine
 
-    char choosenLine = "";
+    char choosenLine;
     if(selectionOfLine == true){
         choosenLine = '_';
     } else {
-        choosenLine = currentLine + '0';
+        choosenLine = currentLine + '1';
     }
 
     //Add everything in the array of char.
-	sprintf(memory_space_A, "Choose input: %c         %s", choosenLine, lines[lineToDisplay-1]);
+    sprintf(memory_space_A, "'>' to choose a line:%c  %s", choosenLine, lines[lineToDisplay-1]);
 
-	// Set up for third row
-	char memory_space_B[48] = " ";
+    // Set up for third row
+    char memory_space_B[48] = " ";
     if (lines[lineToDisplay][0] == true){
-        continue; //check if the selected like is '\0', if yes then do nothing
+        //check if the selected like is '\0', if yes then do nothing
        
     }
     
@@ -193,10 +192,10 @@ void setUpToDisplayOnLCD(){
         //memory_space_B[i] = lines[1][i]
         memory_space_B[i] = lines[lineToDisplay][i];
     }
-	
-	// Send everything to improvedtoDisplayOnLCD to do the calculation with checksum then it will send it to the screen
-	improvedtoDisplayOnLCD('A', "O0001", memory_space_A);
-	improvedtoDisplayOnLCD('B', "O0001", memory_space_B);
+    
+    // Send everything to improvedtoDisplayOnLCD to do the calculation with checksum then it will send it to the screen
+    improvedtoDisplayOnLCD('A', "O0001", memory_space_A);
+    improvedtoDisplayOnLCD('B', "O0001", memory_space_B);
     endToDisplayOnLCD();
 }
 
@@ -230,13 +229,13 @@ void changeLine (int targetLine){
     //By default currentLine == 0
     //So if we press 'enter' it will increase currentLine by 1
     //Hence currentLine == 1. And it does this as long as we don't reach the maximum of line possible
-	if (targetLine == -1) {
-		currentLine++;
+    if (targetLine == -1) {
+        currentLine++;
         if (currentLine >= MAX_LINES){
             currentLine = 0; //We reset the currentLine to 0 when it exceeds the maximum possible lines.
         }
-		
-	}
+        
+    }
     else {
         // change to selection
         currentLine = targetLine;
